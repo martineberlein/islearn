@@ -1524,11 +1524,11 @@ def approximately_evaluate_abst_for(
         try:
             result = evaluate_z3_expression(formula.formula)
             if isinstance(result, Success):
-                translation = result.value
+                translation = result.unwrap()
             elif isinstance(result, Tuple):
                 translation = result
             else:
-                raise result.value  # Assuming the failure message is stored in 'value'
+                raise result.unwrap()  # Assuming the failure message is stored in 'value'
 
             # translation = evaluate_z3_expression(formula.formula)
             var_map: Dict[str, language.Variable] = {
